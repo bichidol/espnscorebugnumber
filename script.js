@@ -65,13 +65,13 @@ function switchContainers(digitCount, newScoreStr) {
         //trigger reflow to ensure animation runs
         void newContainer.offsetWidth;
         //now apply the animation
-        newContainer.style.animation = 'slideIn 0.6s forwards';
+        newContainer.style.animation = 'slideIn 0.5s forwards';
     }
 
     containers.forEach(container => {
         if (container !== newContainer && container.style.display !== 'none') {
             //apply slide out animation to old container
-            container.style.animation = 'slideOut 0.6s forwards';
+            container.style.animation = 'slideOut 0.5s forwards';
             container.addEventListener('animationend', () => {
                 container.style.display = 'none';
                 container.style.animation = '';

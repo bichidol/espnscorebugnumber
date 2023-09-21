@@ -18,7 +18,7 @@ body {
     align-items: center;
     justify-content: center;
     background-color: #000;
-    padding: 40px 40px;
+    padding: 20px 40px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: relative;
@@ -67,16 +67,17 @@ body {
     top: 0;
     left: 0;
     right: 0;
+    height: 40px;
 }
 
 .digit {
     position: relative;
     width: 17px;
-    height: 80px;
+    height: 40px;
     font-size: 2rem;
     color: #fff;
     text-align: center;
-    line-height: 80px;
+    line-height: 40px;
     overflow: hidden;
     transition: all 0.9s cubic-bezier(.92,.01,.66,.93);
 }
@@ -85,7 +86,7 @@ body {
         position: absolute;
         width: 100%;
         text-align: center;
-        transition: transform 0.6s;
+        transition: transform 0.5s;
     }
 
 
