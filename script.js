@@ -1,45 +1,50 @@
-let score = 0;
+let scores = {
+    'home': 0,
+    'away': 0
+};
 
-function changeScore(amount) {
-    let newScore = score + amount;
-
+function changeScore(team, amount) {
+    let newScore = scores[team] + amount;
     if (newScore < 0) newScore = 0;
-
-    updateScore(newScore);
+    updateScore(team, newScore);
 }
 
-function updateScore(newScore) {
+function updateScore(team, newScore) {
     if (newScore < 0) newScore = 0;
 
+    const teamPrefix = team + '-';
+    const oldScore = scores[team];
+    scores[team] = newScore;
+
     const newScoreStr = String(newScore);
-    const oldScoreStr = String(score);
+    const oldScoreStr = String(oldScore);
     const newDigitCount = newScoreStr.length;
     const oldDigitCount = oldScoreStr.length;
 
     if (newDigitCount !== oldDigitCount) {
-        switchContainers(newDigitCount, newScoreStr);
+        switchContainers(team, newDigitCount, newScoreStr); //pass the team as an argument
     } else {
         //update digits within the same container
         for (let i = 0; i < newDigitCount; i++) {
             const oldDigit = oldScoreStr[oldScoreStr.length - i - 1] || '';
             const newDigit = newScoreStr[newScoreStr.length - i - 1] || '';
-            const digitElement = document.getElementById(getDigitElementId(newDigitCount, i));
+            const digitElement = document.getElementById(teamPrefix + getDigitElementId(newDigitCount, i)); //prefix team to the ID
             updateDigit(digitElement, oldDigit, newDigit);
         }
     }
-
-    score = newScore;
 }
 
-function switchContainers(digitCount, newScoreStr) {
-    const oneDigitContainer = document.getElementById('one-digit-wrapper');
-    const twoDigitContainer = document.getElementById('two-digit-wrapper');
-    const threeDigitContainer = document.getElementById('three-digit-wrapper');
+
+function switchContainers(team, newDigitCount, newScoreStr) {
+    const teamPrefix = team + '-'; //create a prefix to identify team-specific elements
+    const oneDigitContainer = document.getElementById(teamPrefix + 'one-digit-wrapper');
+    const twoDigitContainer = document.getElementById(teamPrefix + 'two-digit-wrapper');
+    const threeDigitContainer = document.getElementById(teamPrefix + 'three-digit-wrapper');
 
     const containers = [oneDigitContainer, twoDigitContainer, threeDigitContainer];
 
     let newContainer;
-    switch (digitCount) {
+    switch (newDigitCount) { 
         case 1:
             newContainer = oneDigitContainer;
             break;
@@ -53,9 +58,9 @@ function switchContainers(digitCount, newScoreStr) {
 
     if (newContainer) {
         //prepare new container content before animating
-        for (let i = 0; i < digitCount; i++) {
+        for (let i = 0; i < newDigitCount; i++) { 
             const newDigit = newScoreStr[newScoreStr.length - i - 1] || '';
-            const digitElement = document.getElementById(getDigitElementId(digitCount, i));
+            const digitElement = document.getElementById(teamPrefix + getDigitElementId(newDigitCount, i)); //prefix team to the ID
             digitElement.innerHTML = `<div>${newDigit}</div>`;
         }
 
@@ -79,6 +84,7 @@ function switchContainers(digitCount, newScoreStr) {
         }
     });
 }
+
 
 function getDigitElementId(digitCount, index) {
     switch (digitCount) {
@@ -119,8 +125,10 @@ function setInitialScoreboardState() {
     scoreWrapperElement.className = 'score-wrapper one-digit'; //set initial class
 }
 
+//initialize both scoreboards
 document.addEventListener('DOMContentLoaded', (event) => {
-    updateScore(0); //this will set the initial display to 0
+    updateScore('away', 0);
+    updateScore('home', 0);
 });
 
 
