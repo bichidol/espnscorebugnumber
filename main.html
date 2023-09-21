@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Scoreboard Animation</title>
+</head>
+<body>
+    <div class="scoreboard">
+        <div class="score-wrapper" id="one-digit-wrapper">
+            <div class="digit" id="single-digit"></div>
+        </div>
+        <div class="score-wrapper" id="two-digit-wrapper">
+            <div class="digit" id="tens-digit"></div>
+            <div class="digit" id="units-digit"></div>
+        </div>
+        <div class="score-wrapper" id="three-digit-wrapper">
+            <div class="digit" id="hundreds-digit"></div>
+            <div class="digit" id="tens-digit-three"></div>
+            <div class="digit" id="units-digit-three"></div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button onclick="changeScore(1)">+1</button>
+        <button onclick="changeScore(2)">+2</button>
+        <button onclick="changeScore(3)">+3</button>
+        <button onclick="changeScore(-1)">-1</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
